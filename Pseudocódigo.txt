@@ -1,0 +1,52 @@
+Algoritmo Oito Rainhas
+
+procedimento imprimir_solucao(tab[][]) 
+    para i de 0 até N faça
+        para j de 0 até N faça
+            escreva " ", tab[i][j], " "
+        fim para
+        escreva nova linha
+    fim para
+    escreva nova linha
+fim procedimento
+
+função seguro(tab[][], l, c)
+    para i de 0 até c faça
+        se tab[l][i] igual a 1 ou tab[i][c] igual a 1 ou tab[i][c - i + l] igual a 1 então
+            retorne falso
+        fim se
+    fim para
+    retorne verdadeiro
+fim função
+
+função resolver(tab[][], c)
+    se c igual a N então
+        retorne verdadeiro
+    fim se
+
+    para i de 0 até N faça
+        se seguro(tab, i, c) então
+            tab[i][c] = 1
+            se resolver(tab, c + 1) então
+                retorne verdadeiro
+            fim se
+            tab[i][c] = 0
+        fim se
+    fim para
+
+    retorne falso
+fim função
+
+procedimento oito_rainhas()
+    tab[][] = novo array[N][N]
+
+    se não resolver(tab, 0) então
+        escreva "Sem solução"
+        retorne
+    fim se
+
+    imprimir_solucao(tab)
+fim procedimento
+
+principal()
+    oito_rainhas()
